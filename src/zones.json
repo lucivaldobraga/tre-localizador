@@ -1,0 +1,446 @@
+[
+  {
+    "value": "60;2895",
+    "zona": 60,
+    "codMunic": 2895,
+    "label": "060 - ALVARÃES"
+  },
+  {
+    "value": "22;2917",
+    "zona": 22,
+    "codMunic": 2917,
+    "label": "022 - AMATURÁ"
+  },
+  {
+    "value": "6;2933",
+    "zona": 6,
+    "codMunic": 2933,
+    "label": "006 - ANAMÃ"
+  },
+  {
+    "value": "33;2038",
+    "zona": 33,
+    "codMunic": 2038,
+    "label": "033 - ANORI"
+  },
+  {
+    "value": "67;2003",
+    "zona": 67,
+    "codMunic": 2003,
+    "label": "067 - APUÍ"
+  },
+  {
+    "value": "42;2054",
+    "zona": 42,
+    "codMunic": 2054,
+    "label": "042 - ATALAIA DO NORTE"
+  },
+  {
+    "value": "35;2070",
+    "zona": 35,
+    "codMunic": 2070,
+    "label": "035 - AUTAZES"
+  },
+  {
+    "value": "18;2097",
+    "zona": 18,
+    "codMunic": 2097,
+    "label": "018 - BARCELOS"
+  },
+  {
+    "value": "26;2119",
+    "zona": 26,
+    "codMunic": 2119,
+    "label": "026 - BARREIRINHA"
+  },
+  {
+    "value": "20;2135",
+    "zona": 20,
+    "codMunic": 2135,
+    "label": "020 - BENJAMIN CONSTANT"
+  },
+  {
+    "value": "54;2950",
+    "zona": 54,
+    "codMunic": 2950,
+    "label": "054 - BERURI"
+  },
+  {
+    "value": "5;2976",
+    "zona": 5,
+    "codMunic": 2976,
+    "label": "005 - BOA VISTA DO RAMOS"
+  },
+  {
+    "value": "14;2151",
+    "zona": 14,
+    "codMunic": 2151,
+    "label": "014 - BOCA DO ACRE"
+  },
+  {
+    "value": "15;2178",
+    "zona": 15,
+    "codMunic": 2178,
+    "label": "015 - BORBA"
+  },
+  {
+    "value": "6;2992",
+    "zona": 6,
+    "codMunic": 2992,
+    "label": "006 - CAAPIRANGA"
+  },
+  {
+    "value": "13;2194",
+    "zona": 13,
+    "codMunic": 2194,
+    "label": "013 - CANUTAMA"
+  },
+  {
+    "value": "21;2216",
+    "zona": 21,
+    "codMunic": 2216,
+    "label": "021 - CARAUARI"
+  },
+  {
+    "value": "23;2232",
+    "zona": 23,
+    "codMunic": 2232,
+    "label": "023 - CAREIRO"
+  },
+  {
+    "value": "31;2046",
+    "zona": 31,
+    "codMunic": 2046,
+    "label": "031 - CAREIRO DA VÁRZEA"
+  },
+  {
+    "value": "8;2259",
+    "zona": 8,
+    "codMunic": 2259,
+    "label": "008 - COARI"
+  },
+  {
+    "value": "7;2275",
+    "zona": 7,
+    "codMunic": 2275,
+    "label": "007 - CODAJÁS"
+  },
+  {
+    "value": "11;2291",
+    "zona": 11,
+    "codMunic": 2291,
+    "label": "011 - EIRUNEPÉ"
+  },
+  {
+    "value": "46;2313",
+    "zona": 46,
+    "codMunic": 2313,
+    "label": "046 - ENVIRA"
+  },
+  {
+    "value": "10;2330",
+    "zona": 10,
+    "codMunic": 2330,
+    "label": "010 - FONTE BOA"
+  },
+  {
+    "value": "45;2020",
+    "zona": 45,
+    "codMunic": 2020,
+    "label": "045 - GUAJARÁ"
+  },
+  {
+    "value": "17;2356",
+    "zona": 17,
+    "codMunic": 2356,
+    "label": "017 - HUMAITÁ"
+  },
+  {
+    "value": "45;2399",
+    "zona": 45,
+    "codMunic": 2399,
+    "label": "045 - IPIXUNA"
+  },
+  {
+    "value": "56;98353",
+    "zona": 56,
+    "codMunic": 98353,
+    "label": "056 - IRANDUBA"
+  },
+  {
+    "value": "3;2410",
+    "zona": 3,
+    "codMunic": 2410,
+    "label": "003 - ITACOATIARA"
+  },
+  {
+    "value": "69;98370",
+    "zona": 69,
+    "codMunic": 98370,
+    "label": "069 - ITAMARATI"
+  },
+  {
+    "value": "24;2437",
+    "zona": 24,
+    "codMunic": 2437,
+    "label": "024 - ITAPIRANGA"
+  },
+  {
+    "value": "48;2453",
+    "zona": 48,
+    "codMunic": 2453,
+    "label": "048 - JAPURÁ"
+  },
+  {
+    "value": "50;2470",
+    "zona": 50,
+    "codMunic": 2470,
+    "label": "050 - JURUÁ"
+  },
+  {
+    "value": "41;2496",
+    "zona": 41,
+    "codMunic": 2496,
+    "label": "041 - JUTAÍ"
+  },
+  {
+    "value": "12;2518",
+    "zona": 12,
+    "codMunic": 2518,
+    "label": "012 - LÁBREA"
+  },
+  {
+    "value": "6;2534",
+    "zona": 6,
+    "codMunic": 2534,
+    "label": "006 - MANACAPURU"
+  },
+  {
+    "value": "23;98396",
+    "zona": 23,
+    "codMunic": 98396,
+    "label": "023 - MANAQUIRI"
+  },
+  {
+    "value": "1;2550",
+    "zona": 1,
+    "codMunic": 2550,
+    "label": "001 - MANAUS"
+  },
+  {
+    "value": "2;2550",
+    "zona": 2,
+    "codMunic": 2550,
+    "label": "002 - MANAUS"
+  },
+  {
+    "value": "31;2550",
+    "zona": 31,
+    "codMunic": 2550,
+    "label": "031 - MANAUS"
+  },
+  {
+    "value": "32;2550",
+    "zona": 32,
+    "codMunic": 2550,
+    "label": "032 - MANAUS"
+  },
+  {
+    "value": "37;2550",
+    "zona": 37,
+    "codMunic": 2550,
+    "label": "037 - MANAUS"
+  },
+  {
+    "value": "40;2550",
+    "zona": 40,
+    "codMunic": 2550,
+    "label": "040 - MANAUS"
+  },
+  {
+    "value": "58;2550",
+    "zona": 58,
+    "codMunic": 2550,
+    "label": "058 - MANAUS"
+  },
+  {
+    "value": "59;2550",
+    "zona": 59,
+    "codMunic": 2550,
+    "label": "059 - MANAUS"
+  },
+  {
+    "value": "62;2550",
+    "zona": 62,
+    "codMunic": 2550,
+    "label": "062 - MANAUS"
+  },
+  {
+    "value": "63;2550",
+    "zona": 63,
+    "codMunic": 2550,
+    "label": "063 - MANAUS"
+  },
+  {
+    "value": "65;2550",
+    "zona": 65,
+    "codMunic": 2550,
+    "label": "065 - MANAUS"
+  },
+  {
+    "value": "68;2550",
+    "zona": 68,
+    "codMunic": 2550,
+    "label": "068 - MANAUS"
+  },
+  {
+    "value": "70;2550",
+    "zona": 70,
+    "codMunic": 2550,
+    "label": "070 - MANAUS"
+  },
+  {
+    "value": "16;2577",
+    "zona": 16,
+    "codMunic": 2577,
+    "label": "016 - MANICORÉ"
+  },
+  {
+    "value": "49;2593",
+    "zona": 49,
+    "codMunic": 2593,
+    "label": "049 - MARAÃ"
+  },
+  {
+    "value": "5;2615",
+    "zona": 5,
+    "codMunic": 2615,
+    "label": "005 - MAUÉS"
+  },
+  {
+    "value": "43;2631",
+    "zona": 43,
+    "codMunic": 2631,
+    "label": "043 - NHAMUNDÁ"
+  },
+  {
+    "value": "35;2658",
+    "zona": 35,
+    "codMunic": 2658,
+    "label": "035 - NOVA OLINDA DO NORTE"
+  },
+  {
+    "value": "34;2011",
+    "zona": 34,
+    "codMunic": 2011,
+    "label": "034 - NOVO AIRÃO"
+  },
+  {
+    "value": "29;2674",
+    "zona": 29,
+    "codMunic": 2674,
+    "label": "029 - NOVO ARIPUANÃ"
+  },
+  {
+    "value": "4;2690",
+    "zona": 4,
+    "codMunic": 2690,
+    "label": "004 - PARINTINS"
+  },
+  {
+    "value": "44;2712",
+    "zona": 44,
+    "codMunic": 2712,
+    "label": "044 - PAUINI"
+  },
+  {
+    "value": "51;98418",
+    "zona": 51,
+    "codMunic": 98418,
+    "label": "051 - PRESIDENTE FIGUEIREDO"
+  },
+  {
+    "value": "68;98434",
+    "zona": 68,
+    "codMunic": 98434,
+    "label": "068 - RIO PRETO DA EVA"
+  },
+  {
+    "value": "30;2372",
+    "zona": 30,
+    "codMunic": 2372,
+    "label": "030 - SANTA ISABEL DO RIO NEGRO"
+  },
+  {
+    "value": "47;2739",
+    "zona": 47,
+    "codMunic": 2739,
+    "label": "047 - SANTO ANTÔNIO DO IÇÁ"
+  },
+  {
+    "value": "19;2836",
+    "zona": 19,
+    "codMunic": 2836,
+    "label": "019 - SÃO GABRIEL DA CACHOEIRA"
+  },
+  {
+    "value": "22;2755",
+    "zona": 22,
+    "codMunic": 2755,
+    "label": "022 - SÃO PAULO DE OLIVENÇA"
+  },
+  {
+    "value": "27;98450",
+    "zona": 27,
+    "codMunic": 98450,
+    "label": "027 - SÃO SEBASTIÃO DO UATUMÃ"
+  },
+  {
+    "value": "24;2771",
+    "zona": 24,
+    "codMunic": 2771,
+    "label": "024 - SILVES"
+  },
+  {
+    "value": "36;98477",
+    "zona": 36,
+    "codMunic": 98477,
+    "label": "036 - TABATINGA"
+  },
+  {
+    "value": "38;2798",
+    "zona": 38,
+    "codMunic": 2798,
+    "label": "038 - TAPAUÁ"
+  },
+  {
+    "value": "9;2810",
+    "zona": 9,
+    "codMunic": 2810,
+    "label": "009 - TEFÉ"
+  },
+  {
+    "value": "47;98515",
+    "zona": 47,
+    "codMunic": 98515,
+    "label": "047 - TONANTINS"
+  },
+  {
+    "value": "60;98493",
+    "zona": 60,
+    "codMunic": 98493,
+    "label": "060 - UARINI"
+  },
+  {
+    "value": "27;2852",
+    "zona": 27,
+    "codMunic": 2852,
+    "label": "027 - URUCARÁ"
+  },
+  {
+    "value": "3;2879",
+    "zona": 3,
+    "codMunic": 2879,
+    "label": "003 - URUCURITUBA"
+  }
+]
