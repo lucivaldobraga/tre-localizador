@@ -82,6 +82,7 @@ export default function BatchValidator() {
           // Busca em todos os municípios desta zona
           let found = false;
           let localEncontrado = null;
+          let secaoEncontrada = null;
           
           for (const codMunic of zoneMap[rowZona]) {
             if (found) break;
@@ -110,18 +111,30 @@ export default function BatchValidator() {
                 }
               }
               
-              if (secoes.find(s => parseInt(s.numSecao, 10) === rowSecao)) {
+              const sec = secoes.find(s => parseInt(s.numSecao, 10) === rowSecao);
+              if (sec) {
                 found = true;
                 localEncontrado = local;
+                secaoEncontrada = sec;
                 break;
               }
             }
           }
           
           if (found) {
-            statusMsg = `Correto - Local: ${localEncontrado.nomLocal}, ${localEncontrado.bairro}`;
+            statusMsg = `Correto`;
+            row["Local de Votação"] = localEncontrado.nomLocal;
+            row["Endereço"] = localEncontrado.endereco;
+            row["Bairro/Município"] = `${localEncontrado.bairro} - ${localEncontrado.municipio}`;
+            row["Aptos no Local"] = localEncontrado.qtdAptos;
+            row["Aptos na Seção"] = secaoEncontrada.qtdAptos;
           } else {
             statusMsg = "Erro: Seção não encontrada nesta Zona";
+            row["Local de Votação"] = "-";
+            row["Endereço"] = "-";
+            row["Bairro/Município"] = "-";
+            row["Aptos no Local"] = "-";
+            row["Aptos na Seção"] = "-";
           }
         }
         
