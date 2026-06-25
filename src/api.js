@@ -24,8 +24,9 @@ export const fetchTRE = async (endpoint) => {
   
   let url = `${CLOUD_FUNCTION_URL}?endpoint=${endpoint}`;
   
-  // Se rodando local antes de publicar a function, o dev pode usar fallback para o proxy (apenas para debug)
-  if (isDev && !CLOUD_FUNCTION_URL.includes("cloudfunctions.net")) {
+  // Se rodando local (dev server), vamos forçar o uso do proxy do vite
+  // Isso permite testar a aplicação localmente sem depender do deploy da Cloud Function
+  if (isDev) {
      url = `/api/${endpoint}`;
      const res = await fetch(url);
      return await res.json();
