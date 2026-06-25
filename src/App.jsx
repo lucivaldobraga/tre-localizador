@@ -176,21 +176,19 @@ export default function App() {
               />
             </div>
 
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button className="btn-search" onClick={searchLocations} disabled={loading} style={{ flex: 1 }}>
-                <Search size={20} />
-                {loading ? 'Buscando...' : 'Consultar'}
-              </button>
-              
-              <button 
-                className="btn-search"
-                onClick={clearScreen} 
-                disabled={loading}
-                style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)' }}
-              >
-                Limpar
-              </button>
-            </div>
+            <button className="btn-search" onClick={searchLocations} disabled={loading}>
+              <Search size={20} />
+              {loading ? 'Buscando...' : 'Consultar'}
+            </button>
+            
+            <button 
+              className="btn-search"
+              onClick={clearScreen} 
+              disabled={loading}
+              style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)' }}
+            >
+              Limpar
+            </button>
           </div>
 
           {error && (

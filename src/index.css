@@ -65,7 +65,7 @@ body {
   padding: 2rem;
   box-shadow: var(--glass-shadow);
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr auto auto;
   gap: 1rem;
   align-items: flex-end;
   animation: fadeInUp 0.8s ease-out 0.2s both;
