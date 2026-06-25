@@ -6,28 +6,15 @@ import Login from './Login';
 import { auth } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { fetchTRE } from './api';
+import zonesData from './zones.json';
 
-// Principais Zonas de Manaus e Interior (resumido para exemplo)
+const sortedZones = zonesData
+  .map(z => ({ value: z.value, label: z.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+
 const ZONAS = [
   { value: "", label: "Selecione a Zona Eleitoral" },
-  { value: "1;2550", label: "001 - MANAUS" },
-  { value: "2;2550", label: "002 - MANAUS" },
-  { value: "31;2550", label: "031 - MANAUS" },
-  { value: "32;2550", label: "032 - MANAUS" },
-  { value: "37;2550", label: "037 - MANAUS" },
-  { value: "40;2550", label: "040 - MANAUS" },
-  { value: "58;2550", label: "058 - MANAUS" },
-  { value: "59;2550", label: "059 - MANAUS" },
-  { value: "62;2550", label: "062 - MANAUS" },
-  { value: "63;2550", label: "063 - MANAUS" },
-  { value: "65;2550", label: "065 - MANAUS" },
-  { value: "68;2550", label: "068 - MANAUS" },
-  { value: "70;2550", label: "070 - MANAUS" },
-  { value: "8;2259", label: "008 - COARI" },
-  { value: "3;2410", label: "003 - ITACOATIARA" },
-  { value: "6;2534", label: "006 - MANACAPURU" },
-  { value: "4;2690", label: "004 - PARINTINS" },
-  { value: "9;2810", label: "009 - TEFÉ" }
+  ...sortedZones
 ];
 
 export default function App() {
