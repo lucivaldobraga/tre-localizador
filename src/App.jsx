@@ -81,26 +81,30 @@ export default function App() {
       
       const locais = await fetchTRE(`locaisVotacao/${codZona}/${codMunic}`);
       
-      if (!secao) {
-        setResults(locais);
-        setLoading(false);
-        return;
-      }
-      
-      setStatusText(`Procurando a seção ${secao} nos ${locais.length} locais encontrados...`);
-      
       const locaisComASeção = [];
+      const locaisComTodasSecoes = [];
       const batchSize = 5;
+      
       for (let i = 0; i < locais.length; i += batchSize) {
         const batch = locais.slice(i, i + batchSize);
         const promises = batch.map(async (local) => {
           try {
             const secoes = await fetchTRE(`secaoVotacao/porLocalVotacao/${local.codObjeto}`);
-            const secaoEncontrada = secoes.find(s => String(s.numSecao) === String(secao));
-            if (secaoEncontrada) {
-              locaisComASeção.push({
+            
+            if (secao) {
+              // Se o usuário procurou por uma seção específica
+              const secaoEncontrada = secoes.find(s => String(s.numSecao) === String(secao));
+              if (secaoEncontrada) {
+                locaisComASeção.push({
+                  ...local,
+                  aptosSecao: secaoEncontrada.qtdAptos
+                });
+              }
+            } else {
+              // Se não procurou por seção específica, guarda todas as seções para mostrar no local
+              locaisComTodasSecoes.push({
                 ...local,
-                aptosSecao: secaoEncontrada.qtdAptos
+                secoesDisponiveis: secoes
               });
             }
           } catch (err) {
@@ -110,10 +114,14 @@ export default function App() {
         await Promise.all(promises);
       }
       
-      if (locaisComASeção.length === 0) {
-        setError(`A seção ${secao} não foi encontrada na zona selecionada.`);
+      if (secao) {
+        if (locaisComASeção.length === 0) {
+          setError(`A seção ${secao} não foi encontrada na zona selecionada.`);
+        } else {
+          setResults(locaisComASeção);
+        }
       } else {
-        setResults(locaisComASeção);
+        setResults(locaisComTodasSecoes);
       }
       
     } catch (err) {
@@ -228,6 +236,20 @@ export default function App() {
                       </div>
                     )}
                   </div>
+                  
+                  {local.secoesDisponiveis && local.secoesDisponiveis.length > 0 && (
+                    <div className="secoes-list" style={{ marginTop: '1rem', borderTop: '1px solid var(--glass-border)', paddingTop: '1rem' }}>
+                      <h4 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Seções e Aptos a Votar:</h4>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '0.5rem' }}>
+                        {local.secoesDisponiveis.map(sec => (
+                          <div key={sec.numSecao} style={{ background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '8px', textAlign: 'center', fontSize: '0.85rem' }}>
+                            <strong>S. {sec.numSecao}</strong><br/>
+                            <span style={{ color: 'var(--accent-color)' }}>{sec.qtdAptos} aptos</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
