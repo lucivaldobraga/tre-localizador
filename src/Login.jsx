@@ -28,7 +28,7 @@ export default function Login({ onLoginSuccess }) {
     <div className="login-container">
       <div className="login-card">
         <div className="header">
-          <h1>TRE Localizador</h1>
+          <h1>Valida Seção</h1>
           <p>Faça login para acessar o sistema seguro</p>
         </div>
 
@@ -41,7 +41,7 @@ export default function Login({ onLoginSuccess }) {
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="usuario@tre.jus.br"
+                placeholder="seu@email.com"
                 required
               />
             </div>

@@ -170,23 +170,47 @@ export default function BatchValidator() {
         </label>
       </div>
 
-      <button 
-        className="btn-search btn-process" 
-        onClick={processFile} 
-        disabled={!file || processing}
-      >
-        {processing ? (
-          <>
-            <div className="spinner-small"></div>
-            Processando...
-          </>
-        ) : (
-          <>
-            <Download size={20} />
-            Validar e Baixar
-          </>
-        )}
-      </button>
+      <div style={{ display: 'flex', gap: '10px', marginTop: '1rem' }}>
+        <button 
+          className="btn-search btn-process" 
+          onClick={processFile} 
+          disabled={!file || processing}
+          style={{ flex: 1 }}
+        >
+          {processing ? (
+            <>
+              <div className="spinner-small"></div>
+              Processando...
+            </>
+          ) : (
+            <>
+              <Download size={20} />
+              Validar e Baixar
+            </>
+          )}
+        </button>
+
+        <button 
+          onClick={() => { setFile(null); setStatus(''); }} 
+          disabled={!file || processing}
+          style={{ 
+            flex: 1, 
+            background: 'rgba(255, 255, 255, 0.1)', 
+            border: '1px solid var(--glass-border)',
+            color: 'var(--text-primary)',
+            borderRadius: '12px',
+            fontWeight: '600',
+            cursor: !file || processing ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s',
+            opacity: !file || processing ? 0.5 : 1
+          }}
+        >
+          Remover Anexo
+        </button>
+      </div>
 
       {status && (
         <div className={`status-message ${status.includes('Erro') ? 'error' : 'info'}`}>
