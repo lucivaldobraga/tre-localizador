@@ -183,23 +183,12 @@ export default function App() {
               </button>
               
               <button 
+                className="btn-search"
                 onClick={clearScreen} 
                 disabled={loading}
-                style={{ 
-                  flex: 1, 
-                  background: 'rgba(255, 255, 255, 0.1)', 
-                  border: '1px solid var(--glass-border)',
-                  color: 'var(--text-primary)',
-                  borderRadius: '12px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.2s'
-                }}
+                style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)' }}
               >
-                Limpar Tela
+                Limpar
               </button>
             </div>
           </div>
