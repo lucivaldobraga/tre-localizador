@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import { Upload, Download, FileSpreadsheet, CheckCircle, AlertCircle } from 'lucide-react';
 import zonesData from './zones.json';
@@ -18,7 +18,7 @@ export default function BatchValidator() {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
   const [status, setStatus] = useState("");
-  const [fileInputKey, setFileInputKey] = useState(Date.now());
+  const fileInputRef = useRef(null);
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
@@ -194,7 +194,7 @@ export default function BatchValidator() {
       <div className="upload-box">
         <label className="upload-label">
           <input 
-            key={fileInputKey}
+            ref={fileInputRef}
             type="file" 
             accept=".xls,.xlsx" 
             onChange={handleFileUpload}
@@ -228,7 +228,11 @@ export default function BatchValidator() {
         </button>
 
         <button 
-          onClick={() => { setFile(null); setStatus(''); setFileInputKey(Date.now()); }} 
+          onClick={() => { 
+            setFile(null); 
+            setStatus(''); 
+            if (fileInputRef.current) fileInputRef.current.value = ''; 
+          }} 
           disabled={!file || processing}
           style={{ 
             flex: 1, 
