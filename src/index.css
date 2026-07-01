@@ -120,6 +120,28 @@ body {
   align-items: flex-end;
 }
 
+/* Login Specifics */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.btn-login {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 /* Inputs and Forms */
 .input-group {
   display: flex;
