@@ -1,6 +1,7 @@
-import jwt from 'jsonwebtoken';
-import jwksClient from 'jwks-rsa';
+// import jwt from 'jsonwebtoken';
+// import jwksClient from 'jwks-rsa';
 
+/*
 const client = jwksClient({
   jwksUri: 'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com'
 });
@@ -28,6 +29,7 @@ const verifyToken = (token) => {
     });
   });
 };
+*/
 
 const rateLimitMap = new Map();
 const RATE_LIMIT_MAX = 600;
@@ -43,6 +45,7 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  /*
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({ error: "Acesso Negado: Token não fornecido." });
@@ -58,6 +61,9 @@ export default async function handler(req, res) {
   }
 
   const uid = decodedToken.user_id || decodedToken.sub;
+  */
+  const uid = 'anonymous'; // Bypass temporário
+
   const now = Date.now();
   const userRateData = rateLimitMap.get(uid);
 
