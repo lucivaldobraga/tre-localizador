@@ -183,7 +183,7 @@ export default function BatchValidator() {
           }
           
           if (found) {
-            statusMsg = statusMsg ? statusMsg + " | Seção Correta" : "Correto";
+            statusMsg = statusMsg ? statusMsg + " | Seção Correta" : "Todos os dados corretos";
             row["Local de Votação"] = localEncontrado.nomLocal;
             row["Endereço"] = localEncontrado.endereco;
             row["Bairro/Município"] = `${localEncontrado.bairro} - ${localEncontrado.municipio}`;

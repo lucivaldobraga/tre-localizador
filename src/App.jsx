@@ -192,7 +192,13 @@ export default function App() {
                 value={titulo} 
                 onChange={(e) => setTitulo(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && searchLocations()}
+                style={{ borderColor: titulo ? (validarTituloEleitor(titulo) ? '#10b981' : '#ef4444') : undefined }}
               />
+              {titulo && (
+                <span style={{ fontSize: '0.8rem', marginTop: '4px', color: validarTituloEleitor(titulo) ? '#10b981' : '#ef4444', fontWeight: 500 }}>
+                  {validarTituloEleitor(titulo) ? "Título de eleitor correto" : "Título de eleitor incorreto"}
+                </span>
+              )}
             </div>
 
             <div style={{ display: 'flex', gap: '10px', flex: '1 1 300px', height: '100%', alignItems: 'center' }}>
