@@ -7,9 +7,7 @@ import { auth } from './firebase';
 // Por enquanto, usaremos a rota local /api em dev, e em prod usaremos a Cloud Function
 const isDev = import.meta.env.DEV;
 
-// A URL da Cloud Function será configurada aqui após o 'firebase deploy --only functions'
-// Como exemplo, será algo como: https://us-central1-treelocalizador.cloudfunctions.net/proxyTRE
-const CLOUD_FUNCTION_URL = "https://us-central1-treelocalizador.cloudfunctions.net/proxyTRE";
+const CLOUD_FUNCTION_URL = "/api/proxy";
 
 export const fetchTRE = async (endpoint) => {
   if (!auth.currentUser) {
