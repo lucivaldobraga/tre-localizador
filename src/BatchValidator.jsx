@@ -18,12 +18,34 @@ export default function BatchValidator() {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
   const [status, setStatus] = useState("");
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    if (!processing) setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (processing) return;
+    
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile) {
+      setFile(droppedFile);
     }
   };
 
@@ -200,7 +222,13 @@ export default function BatchValidator() {
       </p>
 
       <div className="upload-box">
-        <label className="upload-label">
+        <label 
+          className={`upload-label ${isDragging ? 'dragging' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          style={{ borderColor: isDragging ? 'var(--primary-color)' : '', background: isDragging ? 'rgba(99, 102, 241, 0.1)' : '' }}
+        >
           <input 
             ref={fileInputRef}
             type="file" 
@@ -208,7 +236,7 @@ export default function BatchValidator() {
             onChange={handleFileUpload}
             disabled={processing}
           />
-          <FileSpreadsheet size={48} className="upload-icon" />
+          <FileSpreadsheet size={48} className="upload-icon" style={{ transform: isDragging ? 'scale(1.1) translateY(-5px)' : '' }} />
           <span className="upload-text">
             {file ? file.name : "Clique aqui ou arraste sua planilha (.xlsx)"}
           </span>

@@ -186,7 +186,7 @@ export default function App() {
                 className="btn-search"
                 onClick={clearScreen} 
                 disabled={loading}
-                style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)', padding: '0 20px' }}
+                style={{ flex: 1, background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)' }}
               >
                 Limpar
               </button>
