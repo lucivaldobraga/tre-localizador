@@ -102,7 +102,11 @@ export default function BatchValidator() {
             }
             
             const locaisFaltantes = allLocais.filter(loc => !secoesCache[loc.codObjeto]);
-            const batchSize = 10;
+            const batchSize = 3; // Reduzido para evitar suspeita de DDoS
+            
+            // Helper para atraso aleatório (Jitter)
+            const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
             for (let b = 0; b < locaisFaltantes.length; b += batchSize) {
               const batch = locaisFaltantes.slice(b, b + batchSize);
               await Promise.all(batch.map(async (local) => {
@@ -113,6 +117,10 @@ export default function BatchValidator() {
                   secoesCache[local.codObjeto] = [];
                 }
               }));
+              
+              // Jitter: delay aleatório entre 300ms e 800ms entre cada pequeno lote
+              const randomDelay = Math.floor(Math.random() * 500) + 300;
+              await delay(randomDelay);
             }
             
             zoneWarmedUp.add(rowZona);
@@ -268,9 +276,10 @@ export default function BatchValidator() {
               style={{ width: `${(progress.current / progress.total) * 100}%` }}
             ></div>
           </div>
-          <p className="progress-text">
-            Validando linha {progress.current} de {progress.total}
-          </p>
+          <div className="progress-text">
+            <span>Processando arquivo...</span>
+            <span>{progress.current} / {progress.total} linhas validadas</span>
+          </div>
         </div>
       )}
     </div>
