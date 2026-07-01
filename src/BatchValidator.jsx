@@ -18,6 +18,7 @@ export default function BatchValidator() {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
   const [status, setStatus] = useState("");
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
@@ -64,6 +65,7 @@ export default function BatchValidator() {
       // CACHES
       const locaisCache = {}; // chave: "zona-codMunic", valor: locais array
       const secoesCache = {}; // chave: codObjeto (local), valor: seções array
+      const zoneWarmedUp = new Set(); // Conjunto de zonas que já tiveram cache completo baixado
       
       setStatus("Validando dados...");
       
@@ -79,7 +81,45 @@ export default function BatchValidator() {
         } else if (!zoneMap[rowZona]) {
           statusMsg = "Erro: Zona inválida ou não pertence ao AM";
         } else {
-          // Busca em todos os municípios desta zona
+          // Pré-aquece o cache da Zona inteira em paralelo (batches de 10) para ficar super rápido
+          if (!zoneWarmedUp.has(rowZona)) {
+            setStatus(`Baixando dados da Zona ${rowZona} (isso ocorre apenas 1x por zona)...`);
+            let allLocais = [];
+            
+            for (const codMunic of zoneMap[rowZona]) {
+              const cacheKeyLocais = `${rowZona}-${codMunic}`;
+              if (!locaisCache[cacheKeyLocais]) {
+                try {
+                  const l = await fetchTRE(`locaisVotacao/${rowZona}/${codMunic}`);
+                  locaisCache[cacheKeyLocais] = l;
+                  allLocais.push(...l);
+                } catch (e) {
+                  locaisCache[cacheKeyLocais] = [];
+                }
+              } else {
+                allLocais.push(...locaisCache[cacheKeyLocais]);
+              }
+            }
+            
+            const locaisFaltantes = allLocais.filter(loc => !secoesCache[loc.codObjeto]);
+            const batchSize = 10;
+            for (let b = 0; b < locaisFaltantes.length; b += batchSize) {
+              const batch = locaisFaltantes.slice(b, b + batchSize);
+              await Promise.all(batch.map(async (local) => {
+                try {
+                  const s = await fetchTRE(`secaoVotacao/porLocalVotacao/${local.codObjeto}`);
+                  secoesCache[local.codObjeto] = s;
+                } catch(e) {
+                  secoesCache[local.codObjeto] = [];
+                }
+              }));
+            }
+            
+            zoneWarmedUp.add(rowZona);
+            setStatus("Validando dados...");
+          }
+
+          // Busca em todos os municípios desta zona (agora usa 100% de cache local e instantâneo)
           let found = false;
           let localEncontrado = null;
           let secaoEncontrada = null;
@@ -88,28 +128,11 @@ export default function BatchValidator() {
             if (found) break;
             
             const cacheKeyLocais = `${rowZona}-${codMunic}`;
-            let locais = locaisCache[cacheKeyLocais];
-            
-            if (!locais) {
-              try {
-                locais = await fetchTRE(`locaisVotacao/${rowZona}/${codMunic}`);
-                locaisCache[cacheKeyLocais] = locais;
-              } catch (e) {
-                locais = [];
-              }
-            }
+            let locais = locaisCache[cacheKeyLocais] || [];
             
             // Procura a seção nestes locais
             for (const local of locais) {
-              let secoes = secoesCache[local.codObjeto];
-              if (!secoes) {
-                try {
-                  secoes = await fetchTRE(`secaoVotacao/porLocalVotacao/${local.codObjeto}`);
-                  secoesCache[local.codObjeto] = secoes;
-                } catch(e) {
-                  secoes = [];
-                }
-              }
+              let secoes = secoesCache[local.codObjeto] || [];
               
               const sec = secoes.find(s => parseInt(s.numSecao, 10) === rowSecao);
               if (sec) {
@@ -171,6 +194,7 @@ export default function BatchValidator() {
       <div className="upload-box">
         <label className="upload-label">
           <input 
+            key={fileInputKey}
             type="file" 
             accept=".xls,.xlsx" 
             onChange={handleFileUpload}
@@ -204,7 +228,7 @@ export default function BatchValidator() {
         </button>
 
         <button 
-          onClick={() => { setFile(null); setStatus(''); }} 
+          onClick={() => { setFile(null); setStatus(''); setFileInputKey(Date.now()); }} 
           disabled={!file || processing}
           style={{ 
             flex: 1, 
