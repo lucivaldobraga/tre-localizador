@@ -176,7 +176,7 @@ export default function App() {
               />
             </div>
 
-            <div style={{ display: 'flex', gap: '10px', flex: 1, minWidth: '200px' }}>
+            <div style={{ display: 'flex', gap: '10px', flex: '1 1 300px', height: '100%', alignItems: 'center' }}>
               <button className="btn-search" onClick={searchLocations} disabled={loading} style={{ flex: 1 }}>
                 <Search size={20} />
                 {loading ? 'Buscando...' : 'Consultar'}
@@ -186,7 +186,7 @@ export default function App() {
                 className="btn-search"
                 onClick={clearScreen} 
                 disabled={loading}
-                style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)' }}
+                style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid var(--glass-border)', padding: '0 20px' }}
               >
                 Limpar
               </button>
