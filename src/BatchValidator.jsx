@@ -3,6 +3,8 @@ import * as XLSX from 'xlsx';
 import { Upload, Download, FileSpreadsheet, CheckCircle, AlertCircle } from 'lucide-react';
 import zonesData from './zones.json';
 import { fetchTRE } from './api';
+import { validarTituloEleitor } from './utils/validadores';
+import './index.css';
 
 // Mapeamento zona -> array de codMunic
 const zoneMap = {};
@@ -77,6 +79,7 @@ export default function BatchValidator() {
 
       const zonaKey = getColumnKey(['zona']);
       const secaoKey = getColumnKey(['seção', 'secao', 'seçao']);
+      const tituloKey = getColumnKey(['título', 'titulo']);
       
       if (!zonaKey || !secaoKey) {
         throw new Error("Não foi possível identificar as colunas 'Zona' e 'Seção'. Certifique-se que elas existem na primeira linha.");
@@ -95,13 +98,18 @@ export default function BatchValidator() {
         const row = rows[i];
         let rowZona = parseInt(row[zonaKey], 10);
         let rowSecao = parseInt(row[secaoKey], 10);
+        let rowTitulo = tituloKey ? String(row[tituloKey]).trim() : "";
         
         let statusMsg = "";
         
+        if (rowTitulo && !validarTituloEleitor(rowTitulo)) {
+          statusMsg = "Erro: Título de Eleitor Inválido";
+        }
+        
         if (isNaN(rowZona) || isNaN(rowSecao)) {
-          statusMsg = "Erro: Zona ou Seção inválida na planilha";
+          statusMsg = statusMsg ? statusMsg + " | Zona ou Seção inválida" : "Erro: Zona ou Seção inválida na planilha";
         } else if (!zoneMap[rowZona]) {
-          statusMsg = "Erro: Zona inválida ou não pertence ao AM";
+          statusMsg = statusMsg ? statusMsg + " | Zona inválida ou não pertence ao AM" : "Erro: Zona inválida ou não pertence ao AM";
         } else {
           // Pré-aquece o cache da Zona inteira em paralelo (batches de 10) para ficar super rápido
           if (!zoneWarmedUp.has(rowZona)) {
@@ -175,14 +183,14 @@ export default function BatchValidator() {
           }
           
           if (found) {
-            statusMsg = `Correto`;
+            statusMsg = statusMsg ? statusMsg + " | Seção Correta" : "Correto";
             row["Local de Votação"] = localEncontrado.nomLocal;
             row["Endereço"] = localEncontrado.endereco;
             row["Bairro/Município"] = `${localEncontrado.bairro} - ${localEncontrado.municipio}`;
             row["Aptos no Local"] = localEncontrado.qtdAptos;
             row["Aptos na Seção"] = secaoEncontrada.qtdAptos;
           } else {
-            statusMsg = "Erro: Seção não encontrada nesta Zona";
+            statusMsg = statusMsg ? statusMsg + " | Seção não encontrada nesta Zona" : "Erro: Seção não encontrada nesta Zona";
             row["Local de Votação"] = "-";
             row["Endereço"] = "-";
             row["Bairro/Município"] = "-";

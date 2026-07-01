@@ -7,6 +7,7 @@ import { auth } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { fetchTRE } from './api';
 import zonesData from './zones.json';
+import { validarTituloEleitor } from './utils/validadores';
 
 const sortedZones = zonesData
   .map(z => ({ value: z.value, label: z.label }))
@@ -24,6 +25,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('individual');
   const [zona, setZona] = useState("");
   const [secao, setSecao] = useState("");
+  const [titulo, setTitulo] = useState("");
   const [loading, setLoading] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [results, setResults] = useState([]);
@@ -54,6 +56,10 @@ export default function App() {
   }
 
   const searchLocations = async () => {
+    if (titulo && !validarTituloEleitor(titulo)) {
+      setError("O número do Título de Eleitor é inválido matematicamente.");
+      return;
+    }
     if (!zona) {
       setError("Por favor, selecione uma Zona Eleitoral.");
       return;
@@ -121,8 +127,10 @@ export default function App() {
   const clearScreen = () => {
     setZona("");
     setSecao("");
+    setTitulo("");
     setResults([]);
     setError(null);
+    setStatusText("");
   };
 
   return (
@@ -172,6 +180,17 @@ export default function App() {
                 placeholder="Ex: 123" 
                 value={secao} 
                 onChange={(e) => setSecao(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && searchLocations()}
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Título (Opcional)</label>
+              <input 
+                type="number" 
+                placeholder="Apenas números" 
+                value={titulo} 
+                onChange={(e) => setTitulo(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && searchLocations()}
               />
             </div>
